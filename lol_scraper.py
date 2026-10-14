@@ -251,7 +251,7 @@ def main():
                 print(f"  * {r}")
             print("-" * 45)
             if build['skill_order']:
-                print(f"Ordine Abilità   : {' > '.join(build['skill_order'])}")
+                print(f"Ordine Abilita    : {' > '.join(build['skill_order'])}")
             print("=" * 45)
         except Exception as e:
             print(f"Errore durante il recupero della build: {e}")
