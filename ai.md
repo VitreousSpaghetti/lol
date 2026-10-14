@@ -54,20 +54,38 @@ Traditional scraping on LoL statistics sites (e.g., using BeautifulSoup or Selen
 
 The input file must contain Riot IDs, one per line. Markdown lists (`- `, `* `), numbered lists (`1. `), or raw lines are automatically sanitized.
 
+### Player Role Specification (Mandatory / Recommended)
+Roles must be specified inside brackets `[...]` immediately after the player's Riot ID tag. Multiple roles can be assigned by separating them with commas:
+```
+- GameName#TagLine [ROLE1,ROLE2,...]
+```
+
+#### Supported Roles & Aliases:
+- **TOP**: `TOP`
+- **JUNGLE**: `JUNGLE`, `JUNGLA`, `JNG`
+- **MID**: `MID`, `MIDDLE`
+- **ADC**: `ADC`, `BOT`, `AD`
+- **SUPPORT**: `SUPPORT`, `SUPP`, `SUP`
+
+#### Analytics Impact:
+- **Primary Role:** The first role declared inside `[...]` takes absolute precedence over statistical role detection across all CSV files (`01_roster_overview.csv`, `03_in_game_playstyle_metrics.csv`, `04_scouting_report_tattico.csv`, and `05_sinergie_squadra.csv`).
+- **Secondary Roles:** Any additional roles inside `[...]` are assigned as secondary/off-roles.
+- **Fallback:** If no `[...]` tag is present on a line, the engine automatically falls back to statistical detection based on recent match history and champion pool distributions.
+
 ### Commenting Out Players
 Any line starting with `#` or `//`—or any list item where `#` precedes the name (e.g. `#- Player#Tag`, `# Player#Tag`, or `- # Player#Tag`)—is **automatically ignored/skipped** by all batch scrapers:
 
 ```markdown
 # Giocatori di Squadra (Markdown headers are ignored)
 
-- Fang Arroway#EUW
-#- ClippeteCloppete#8279   <-- SKIPPED (commented out with #-)
-#- ExodiaTheOnly1#EUW      <-- SKIPPED
-- Jimbo Cataza#1994        <-- PROCESSED
-#- shineless#light         <-- SKIPPED
-- UnluckyTeemo#995         <-- PROCESSED
-- Ándre Agassi#8884        <-- PROCESSED
-- Vitreous#COPS            <-- PROCESSED
+- Fang Arroway#EUW [TOP,MID,JUNGLA]  <-- PROCESSED (Primary: TOP, Secondary: MID, JUNGLE)
+#- ClippeteCloppete#8279             <-- SKIPPED (commented out with #-)
+#- ExodiaTheOnly1#EUW                <-- SKIPPED
+- Jimbo Cataza#1994                  <-- PROCESSED (Fallback to statistical role)
+#- shineless#light                   <-- SKIPPED
+- UnluckyTeemo#995                   <-- PROCESSED
+- Ándre Agassi#8884                  <-- PROCESSED
+- Vitreous#COPS [TOP]                <-- PROCESSED (Primary: TOP)
 ```
 
 ---

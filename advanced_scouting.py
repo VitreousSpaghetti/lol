@@ -134,8 +134,27 @@ def get_champion_meta(name: str) -> Dict[str, str]:
         "first_pick": "Situazionale"
     }
 
-def parse_input_file(filepath: str) -> List[Tuple[str, str]]:
-    """Estrae l'elenco dei giocatori (Nome, Tag) dal file markdown/testo"""
+def normalize_role(r: str) -> str:
+    """Normalizza i ruoli in formato standard (TOP, JUNGLE, MID, ADC, SUPPORT)"""
+    rc = r.strip().upper()
+    if rc in ["JUNGLA", "JUNGLE", "JNG"]:
+        return "JUNGLE"
+    if rc in ["SUP", "SUPP", "SUPPORT"]:
+        return "SUPPORT"
+    if rc in ["BOT", "ADC", "AD"]:
+        return "ADC"
+    if rc in ["MID", "MIDDLE"]:
+        return "MID"
+    if rc in ["TOP"]:
+        return "TOP"
+    return rc
+
+def parse_input_file(filepath: str) -> List[Tuple[str, str, List[str]]]:
+    """
+    Estrae l'elenco dei giocatori (Nome, Tag, Ruoli Dichiarati) dal file markdown/testo.
+    Supporta ruoli obbligatori/opzionali specificati tra parentesi quadre dopo il tag,
+    es: - Fang Arroway#EUW [TOP,MID,JUNGLA]
+    """
     if not os.path.exists(filepath):
         raise FileNotFoundError(f"File non trovato: {filepath}")
 
@@ -154,20 +173,29 @@ def parse_input_file(filepath: str) -> List[Tuple[str, str]]:
             if not cleaned or cleaned.startswith("#") or cleaned.startswith("//"):
                 continue
 
+            # Estrae ruoli specificati tra parentesi quadre subito dopo il tag, es: [TOP,MID,JUNGLA]
+            declared_roles = []
+            role_match = re.search(r'\[(.*?)\]', cleaned)
+            if role_match:
+                raw_roles = role_match.group(1).split(",")
+                declared_roles = [normalize_role(r) for r in raw_roles if r.strip()]
+                cleaned = re.sub(r'\[.*?\]', '', cleaned).strip()
+
             if "#" in cleaned:
                 parts = cleaned.split("#", 1)
                 name = parts[0].strip()
                 tag = parts[1].strip()
                 if name and tag:
-                    players.append((name, tag))
+                    players.append((name, tag, declared_roles))
     return players
 
-def fetch_player_scouting_data(client: httpx.Client, name: str, tag: str, region: str = "euw") -> Dict[str, Any]:
+def fetch_player_scouting_data(client: httpx.Client, name: str, tag: str, region: str = "euw", declared_roles: List[str] = None) -> Dict[str, Any]:
     """
     Effettua lo scraping completo del profilo OP.GG:
     - Metadati e rank SoloQ/Flex
     - Champion Pool stagionale con partite, winrate, KDA
     - Cronologia partite recenti (per tilt factor, trend e KDA)
+    - Ruoli primario/secondario dichiarati via tag [RUOLI] o calcolati
     """
     slug = urllib.parse.quote(f"{name}-{tag}")
     url = f"https://op.gg/lol/summoners/{region.lower()}/{slug}"
@@ -321,19 +349,23 @@ def fetch_player_scouting_data(client: httpx.Client, name: str, tag: str, region
     elif recent_wr >= 50:
         tilt_risk = "Normale / Equilibrato"
 
-    # 5. Determinazione Ruolo Principale ed Secondario
-    role_counts = {}
-    for c in champions:
-        r = c["role"]
-        role_counts[r] = role_counts.get(r, 0) + c["play"]
-    for m in recent_matches:
-        c_meta = get_champion_meta(m.get("champion", ""))
-        r = c_meta["role"]
-        role_counts[r] = role_counts.get(r, 0) + 1
+    # 5. Determinazione Ruolo Principale ed Secondario (priorità assoluta ai ruoli dichiarati tra [])
+    if declared_roles and len(declared_roles) > 0:
+        primary_role = declared_roles[0]
+        secondary_role = ", ".join(declared_roles[1:]) if len(declared_roles) > 1 else "Nessuno (Specializzato)"
+    else:
+        role_counts = {}
+        for c in champions:
+            r = c["role"]
+            role_counts[r] = role_counts.get(r, 0) + c["play"]
+        for m in recent_matches:
+            c_meta = get_champion_meta(m.get("champion", ""))
+            r = c_meta["role"]
+            role_counts[r] = role_counts.get(r, 0) + 1
 
-    sorted_roles = sorted(role_counts.items(), key=lambda x: x[1], reverse=True)
-    primary_role = sorted_roles[0][0] if sorted_roles else "Flessibile"
-    secondary_role = sorted_roles[1][0] if len(sorted_roles) > 1 else "Autofill"
+        sorted_roles = sorted(role_counts.items(), key=lambda x: x[1], reverse=True)
+        primary_role = sorted_roles[0][0] if sorted_roles else "Flessibile"
+        secondary_role = sorted_roles[1][0] if len(sorted_roles) > 1 else "Autofill"
 
     # 6. Analisi Sindrome OTP
     otp_status = "Pool Bilanciata"
@@ -393,7 +425,8 @@ def fetch_player_scouting_data(client: httpx.Client, name: str, tag: str, region
         "recent_streak": streak_type,
         "tilt_risk": tilt_risk,
         "champions": champions,
-        "recent_matches": recent_matches
+        "recent_matches": recent_matches,
+        "declared_roles": declared_roles or []
     }
 
 
@@ -416,10 +449,11 @@ def generate_scouting_suite(input_file: str, output_dir: str = "output", region:
     }, timeout=15.0)
 
     roster_data = []
-    for idx, (name, tag) in enumerate(players_list, 1):
-        print(f"[{idx}/{len(players_list)}] Analisi avanzata: {name}#{tag} ... ", end="", flush=True)
+    for idx, (name, tag, declared_roles) in enumerate(players_list, 1):
+        role_label = f" [{', '.join(declared_roles)}]" if declared_roles else ""
+        print(f"[{idx}/{len(players_list)}] Analisi avanzata: {name}#{tag}{role_label} ... ", end="", flush=True)
         try:
-            data = fetch_player_scouting_data(client, name, tag, region)
+            data = fetch_player_scouting_data(client, name, tag, region, declared_roles=declared_roles)
             roster_data.append(data)
             print(f"OK ({data['solo_rank']} | Ruolo: {data['primary_role']} | Top Pick: {data['champions'][0]['name'] if data['champions'] else 'N/A'})")
         except Exception as e:
@@ -434,7 +468,7 @@ def generate_scouting_suite(input_file: str, output_dir: str = "output", region:
     # ----------------------------------------------------
     f1_path = os.path.join(output_dir, "01_roster_overview.csv")
     f1_fields = [
-        "Riot_ID", "Livello", "Ruolo_Principale", "Ruolo_Secondario",
+        "Riot_ID", "Livello", "Ruolo_Principale", "Ruolo_Secondario", "Ruoli_Dichiarati_File",
         "SoloQ_Rank", "SoloQ_LP", "SoloQ_Winrate_%", "SoloQ_Partite_Totali",
         "Top_Comfort_Picks", "Sindrome_OTP", "Profilo_Danno_Prevalente",
         "Forma_Recente_10_Games", "Serie_Attuale", "Rischio_Tilt_Mentalita"
@@ -449,6 +483,7 @@ def generate_scouting_suite(input_file: str, output_dir: str = "output", region:
                 "Livello": p["level"],
                 "Ruolo_Principale": p["primary_role"],
                 "Ruolo_Secondario": p["secondary_role"],
+                "Ruoli_Dichiarati_File": ", ".join(p["declared_roles"]) if p["declared_roles"] else "Non specificati (Rilevati da stats)",
                 "SoloQ_Rank": p["solo_rank"],
                 "SoloQ_LP": p["solo_lp"],
                 "SoloQ_Winrate_%": p["solo_wr"],

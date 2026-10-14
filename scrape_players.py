@@ -45,6 +45,9 @@ def parse_players_from_file(filepath: str) -> List[Tuple[str, str]]:
             if not cleaned or cleaned.startswith("#") or cleaned.startswith("//"):
                 continue
 
+            # Rimuove eventuali ruoli tra parentesi quadre [...]
+            cleaned = re.sub(r'\[.*?\]', '', cleaned).strip()
+
             if "#" in cleaned:
                 parts = cleaned.split("#", 1)
                 name = parts[0].strip()
