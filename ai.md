@@ -52,17 +52,22 @@ Traditional scraping on LoL statistics sites (e.g., using BeautifulSoup or Selen
 
 ## 4. Input File Format (`giocatori.md` or custom)
 
-The input file must contain Riot IDs, one per line. Markdown lists (`- `, `* `), numbered lists (`1. `), or raw lines are automatically sanitized:
+The input file must contain Riot IDs, one per line. Markdown lists (`- `, `* `), numbered lists (`1. `), or raw lines are automatically sanitized.
+
+### Commenting Out Players
+Any line starting with `#` or `//`—or any list item where `#` precedes the name (e.g. `#- Player#Tag`, `# Player#Tag`, or `- # Player#Tag`)—is **automatically ignored/skipped** by all batch scrapers:
 
 ```markdown
+# Giocatori di Squadra (Markdown headers are ignored)
+
 - Fang Arroway#EUW
-- ClippeteCloppete#8279
-- ExodiaTheOnly1#EUW
-- Jimbo Cataza#1994
-- shineless#light
-- UnluckyTeemo#995
-- Ándre Agassi#8884
-- Vitreous#COPS
+#- ClippeteCloppete#8279   <-- SKIPPED (commented out with #-)
+#- ExodiaTheOnly1#EUW      <-- SKIPPED
+- Jimbo Cataza#1994        <-- PROCESSED
+#- shineless#light         <-- SKIPPED
+- UnluckyTeemo#995         <-- PROCESSED
+- Ándre Agassi#8884        <-- PROCESSED
+- Vitreous#COPS            <-- PROCESSED
 ```
 
 ---

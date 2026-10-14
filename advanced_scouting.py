@@ -143,9 +143,17 @@ def parse_input_file(filepath: str) -> List[Tuple[str, str]]:
     with open(filepath, "r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
-            if not line or line.startswith("#"):
+            # Ignora righe vuote o commenti diretti (# o //)
+            if not line or line.startswith("#") or line.startswith("//"):
                 continue
+
+            # Rimuove marcatori di lista all'inizio (es: "- ", "* ", "1. ")
             cleaned = re.sub(r"^[-*•\d.]+\s*", "", line).strip()
+            
+            # Ignora se la riga commentata era preceduta da un bullet (es: "- # Giocatore" o "-# Giocatore")
+            if not cleaned or cleaned.startswith("#") or cleaned.startswith("//"):
+                continue
+
             if "#" in cleaned:
                 parts = cleaned.split("#", 1)
                 name = parts[0].strip()
