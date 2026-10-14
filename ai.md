@@ -72,20 +72,38 @@ Roles must be specified inside brackets `[...]` immediately after the player's R
 - **Secondary Roles:** Any additional roles inside `[...]` are assigned as secondary/off-roles.
 - **Fallback:** If no `[...]` tag is present on a line, the engine automatically falls back to statistical detection based on recent match history and champion pool distributions.
 
+### Mandatory 5-Role Lineup Assignment ("Almeno un giocatore per ruolo")
+When preparing a tournament, Clash, or scrim roster, the engine guarantees complete role coverage across all 5 official League of Legends positions:
+$$\text{STANDARD\_ROLES} = [\text{TOP}, \text{JUNGLE}, \text{MID}, \text{ADC}, \text{SUPPORT}]$$
+
+#### Constraint & Rules:
+1. **At Least / Exactly One Player Per Role:**
+   - Every single role must be covered by at least one player in the starting lineup.
+   - No two starting players can be assigned to the same role.
+2. **Global Assignment Optimization:**
+   - For a roster of 5 players, the engine evaluates all $5! = 120$ possible permutations and selects the configuration that maximizes overall team fit score:
+     $$\text{Score}(p, r) = \text{Bonus}(\text{Declared } [r]) + \text{ChampionPoolVolume}(r) + \text{WinrateModifier}(r)$$
+   - Players with explicit tags (e.g. `Vitreous#COPS [TOP]`) lock into their declared role.
+   - Multi-role flex players (e.g. `Fang Arroway#EUW [TOP, MID, JUNGLA]`) flex into whichever role the team needs most (e.g. MID) to prevent clashes with exclusive specialists.
+   - Non-declared players are assigned to the role where their champion pool demonstrates their highest statistical winrate and game volume (e.g. `Jimbo Cataza#1994` assigned to JUNGLE due to 67% WR on Kayn; `UnluckyTeemo#995` assigned to ADC/APC due to 68% WR on Swain).
+3. **Reserves & Incomplete Lineups:**
+   - **Roster > 5:** Extra players are marked as `RISERVA (ROLE)` and mapped to their best substitute lane in `05_sinergie_squadra.csv`.
+   - **Roster < 5:** Players are assigned to distinct roles; remaining roles are marked as `SCOPERTO / DA RECLUTARE`.
+
 ### Commenting Out Players
 Any line starting with `#` or `//`—or any list item where `#` precedes the name (e.g. `#- Player#Tag`, `# Player#Tag`, or `- # Player#Tag`)—is **automatically ignored/skipped** by all batch scrapers:
 
 ```markdown
 # Giocatori di Squadra (Markdown headers are ignored)
 
-- Fang Arroway#EUW [TOP,MID,JUNGLA]  <-- PROCESSED (Primary: TOP, Secondary: MID, JUNGLE)
+- Fang Arroway#EUW [TOP,MID,JUNGLA]  <-- PROCESSED (Flex: Assigned to MID)
 #- ClippeteCloppete#8279             <-- SKIPPED (commented out with #-)
 #- ExodiaTheOnly1#EUW                <-- SKIPPED
-- Jimbo Cataza#1994                  <-- PROCESSED (Fallback to statistical role)
+- Jimbo Cataza#1994                  <-- PROCESSED (Assigned to JUNGLE via Kayn 67% WR)
 #- shineless#light                   <-- SKIPPED
-- UnluckyTeemo#995                   <-- PROCESSED
-- Ándre Agassi#8884                  <-- PROCESSED
-- Vitreous#COPS [TOP]                <-- PROCESSED (Primary: TOP)
+- UnluckyTeemo#995                   <-- PROCESSED (Assigned to ADC via Swain 68% WR)
+- Ándre Agassi#8884                  <-- PROCESSED (Assigned to SUPPORT via Nautilus 62% WR)
+- Vitreous#COPS [TOP]                <-- PROCESSED (Assigned to TOP via [TOP])
 ```
 
 ---

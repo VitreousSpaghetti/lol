@@ -31,19 +31,29 @@ if hasattr(sys.stdout, "reconfigure"):
 CHAMPION_DB = {
     # TOP
     "Aatrox": {"role": "TOP", "dmg": "AD", "class": "Juggernaut / Bruiser", "first_pick": "Buono"},
+    "Camille": {"role": "TOP", "dmg": "AD / True", "class": "Diver", "first_pick": "Buono"},
     "Cho'Gath": {"role": "TOP", "dmg": "AP / Tank", "class": "Tank", "first_pick": "Situazionale"},
+    "Darius": {"role": "TOP", "dmg": "AD / True", "class": "Juggernaut", "first_pick": "Buono"},
     "Dr. Mundo": {"role": "TOP", "dmg": "Tank / AD", "class": "Juggernaut", "first_pick": "Situazionale"},
     "Fiora": {"role": "TOP", "dmg": "AD", "class": "Skirmisher / Splitpush", "first_pick": "Rischioso"},
     "Garen": {"role": "TOP", "dmg": "AD", "class": "Juggernaut", "first_pick": "Medio"},
+    "Gnar": {"role": "TOP", "dmg": "AD", "class": "Specialist / Teamfight", "first_pick": "Ottimo Blind"},
+    "Gragas": {"role": "TOP / JUNGLE / MID", "dmg": "AP", "class": "Burst / Disruption", "first_pick": "Ottimo Blind"},
+    "Irelia": {"role": "TOP / MID", "dmg": "AD", "class": "Diver / Skirmisher", "first_pick": "Situazionale"},
     "Jax": {"role": "TOP", "dmg": "Hybrid", "class": "Skirmisher", "first_pick": "Buono"},
+    "K'Sante": {"role": "TOP", "dmg": "Tank / AD", "class": "Warden / Skirmisher", "first_pick": "Ottimo Blind"},
     "Malphite": {"role": "TOP", "dmg": "AP / Tank", "class": "Tank / Engage", "first_pick": "Contro AD"},
     "Mordekaiser": {"role": "TOP", "dmg": "AP", "class": "Juggernaut", "first_pick": "Buono"},
     "Ornn": {"role": "TOP", "dmg": "Tank / AP", "class": "Tank / Masterwork", "first_pick": "Ottimo Blind"},
+    "Renekton": {"role": "TOP", "dmg": "AD", "class": "Diver / Early Bully", "first_pick": "Ottimo Blind"},
     "Riven": {"role": "TOP", "dmg": "AD", "class": "Skirmisher", "first_pick": "Rischioso"},
     "Sett": {"role": "TOP", "dmg": "AD", "class": "Juggernaut", "first_pick": "Buono"},
     "Shen": {"role": "TOP", "dmg": "Tank / AP", "class": "Warden / Global TP", "first_pick": "Buono"},
+    "Sion": {"role": "TOP", "dmg": "Tank / AD", "class": "Tank / Scaling", "first_pick": "Buono"},
     "Teemo": {"role": "TOP", "dmg": "AP", "class": "Specialist / Harass", "first_pick": "Rischioso"},
+    "Urgot": {"role": "TOP", "dmg": "AD", "class": "Juggernaut", "first_pick": "Buono"},
     "Volibear": {"role": "TOP", "dmg": "Hybrid / Tank", "class": "Juggernaut / Dive", "first_pick": "Buono"},
+    "Yorick": {"role": "TOP", "dmg": "AD", "class": "Juggernaut / Splitpush", "first_pick": "Situazionale"},
     
     # JUNGLE
     "Amumu": {"role": "JUNGLE", "dmg": "AP / Tank", "class": "Tank / Engage", "first_pick": "Buono"},
@@ -51,16 +61,20 @@ CHAMPION_DB = {
     "Diana": {"role": "MID / JUNGLE", "dmg": "AP", "class": "Assassin / Diver", "first_pick": "Buono"},
     "Elise": {"role": "JUNGLE", "dmg": "AP", "class": "Early Ganker / Diver", "first_pick": "Situazionale"},
     "Hecarim": {"role": "JUNGLE", "dmg": "AD", "class": "Diver", "first_pick": "Buono"},
+    "Jarvan IV": {"role": "JUNGLE", "dmg": "AD", "class": "Diver / Initiator", "first_pick": "Ottimo Blind"},
     "Karthus": {"role": "JUNGLE / APC", "dmg": "AP", "class": "Global / Powerfarm", "first_pick": "Situazionale"},
     "Kayn": {"role": "JUNGLE", "dmg": "AD", "class": "Assassin / Bruiser", "first_pick": "Buono"},
     "Lee Sin": {"role": "JUNGLE", "dmg": "AD", "class": "Playmaker", "first_pick": "Ottimo"},
     "Master Yi": {"role": "JUNGLE", "dmg": "AD", "class": "Skirmisher", "first_pick": "Rischioso"},
     "Nocturne": {"role": "JUNGLE", "dmg": "AD", "class": "Diver / Global Dark", "first_pick": "Buono"},
     "Rengar": {"role": "JUNGLE", "dmg": "AD", "class": "Assassin", "first_pick": "Rischioso"},
+    "Sejuani": {"role": "JUNGLE", "dmg": "Tank / AP", "class": "Tank / CC Lock", "first_pick": "Ottimo Blind"},
     "Shaco": {"role": "JUNGLE", "dmg": "AD / AP", "class": "Trickster", "first_pick": "Rischioso"},
     "Shyvana": {"role": "JUNGLE", "dmg": "AP / Hybrid", "class": "Juggernaut / Powerfarm", "first_pick": "Situazionale"},
+    "Vi": {"role": "JUNGLE", "dmg": "AD", "class": "Diver / Lockdown", "first_pick": "Ottimo Blind"},
     "Viego": {"role": "JUNGLE", "dmg": "AD", "class": "Skirmisher", "first_pick": "Buono"},
     "Xin Zhao": {"role": "JUNGLE", "dmg": "AD", "class": "Diver", "first_pick": "Ottimo Blind"},
+    "Zac": {"role": "JUNGLE / TOP", "dmg": "Tank / AP", "class": "Engage Tank", "first_pick": "Buono"},
     
     # MID
     "Ahri": {"role": "MID", "dmg": "AP", "class": "Mage / Assassin", "first_pick": "Ottimo Blind"},
@@ -90,6 +104,7 @@ CHAMPION_DB = {
     "Jhin": {"role": "ADC", "dmg": "AD", "class": "Utility / Execution", "first_pick": "Ottimo Blind"},
     "Jinx": {"role": "ADC", "dmg": "AD", "class": "Hypercarry / Reset", "first_pick": "Buono"},
     "Kai'Sa": {"role": "ADC", "dmg": "Hybrid", "class": "Dive Marksman", "first_pick": "Buono"},
+    "Kog'Maw": {"role": "ADC", "dmg": "Hybrid / AP", "class": "Hypercarry", "first_pick": "Situazionale"},
     "Lucian": {"role": "ADC / MID", "dmg": "AD", "class": "Early Bully", "first_pick": "Buono"},
     "Miss Fortune": {"role": "ADC", "dmg": "AD", "class": "Teamfight Wombocombo", "first_pick": "Buono"},
     "Samira": {"role": "ADC", "dmg": "AD", "class": "Combo / Reset", "first_pick": "Rischioso"},
@@ -108,13 +123,16 @@ CHAMPION_DB = {
     "Brand": {"role": "SUPPORT / APC", "dmg": "AP", "class": "Mage Support / Teamfight", "first_pick": "Medio"},
     "Braum": {"role": "SUPPORT", "dmg": "Tank", "class": "Warden / Anti-Projectile", "first_pick": "Ottimo contro dive"},
     "Janna": {"role": "SUPPORT", "dmg": "AP", "class": "Disengage Enchanter", "first_pick": "Buono"},
+    "Karma": {"role": "SUPPORT / MID", "dmg": "AP", "class": "Poke Enchanter", "first_pick": "Ottimo Blind"},
     "Leona": {"role": "SUPPORT", "dmg": "Tank", "class": "Heavy CC Engage", "first_pick": "Buono"},
     "Lulu": {"role": "SUPPORT", "dmg": "AP", "class": "Hypercarry Enchanter", "first_pick": "Buono"},
+    "Milio": {"role": "SUPPORT", "dmg": "AP", "class": "Enchanter / Range Buff", "first_pick": "Buono"},
     "Morgana": {"role": "SUPPORT", "dmg": "AP", "class": "Anti-CC / Bind", "first_pick": "Buono"},
     "Nami": {"role": "SUPPORT", "dmg": "AP", "class": "Aggressive Enchanter", "first_pick": "Buono"},
     "Nautilus": {"role": "SUPPORT", "dmg": "Tank / AP", "class": "Point & Click Engage", "first_pick": "Ottimo Blind"},
     "Pyke": {"role": "SUPPORT", "dmg": "AD", "class": "Assassin / Roamer", "first_pick": "Rischioso"},
     "Rakan": {"role": "SUPPORT", "dmg": "AP / Tank", "class": "Mobile Engage", "first_pick": "Ottimo Blind"},
+    "Rell": {"role": "SUPPORT", "dmg": "Tank / AP", "class": "Heavy CC Engage", "first_pick": "Buono"},
     "Senna": {"role": "SUPPORT / ADC", "dmg": "AD", "class": "Marksman Support", "first_pick": "Situazionale"},
     "Soraka": {"role": "SUPPORT", "dmg": "AP", "class": "Healer Enchanter", "first_pick": "Medio"},
     "Thresh": {"role": "SUPPORT", "dmg": "Tank / AP", "class": "Versatile Playmaker", "first_pick": "Ottimo Blind"},
@@ -148,6 +166,113 @@ def normalize_role(r: str) -> str:
     if rc in ["TOP"]:
         return "TOP"
     return rc
+
+STANDARD_ROLES = ["TOP", "JUNGLE", "MID", "ADC", "SUPPORT"]
+
+def champion_matches_role(champ_role: str, target_role: str) -> bool:
+    """Verifica se il ruolo di un campione copre il ruolo target (es: APC -> ADC)"""
+    target = target_role.upper()
+    crole = champ_role.upper()
+    if target == "ADC":
+        return any(k in crole for k in ["ADC", "APC", "BOT"])
+    if target == "SUPPORT":
+        return any(k in crole for k in ["SUPPORT", "SUP"])
+    if target == "JUNGLE":
+        return any(k in crole for k in ["JUNGLE", "JUNGLA", "JNG"])
+    if target == "MID":
+        return any(k in crole for k in ["MID", "MIDDLE"])
+    if target == "TOP":
+        return "TOP" in crole
+    return target in crole
+
+def get_best_champion_for_role(p: Dict[str, Any], r: str) -> Dict[str, Any]:
+    """Trova il miglior comfort pick del giocatore specifico per il ruolo assegnato"""
+    matching_champs = [c for c in p.get("champions", []) if champion_matches_role(c.get("role", ""), r)]
+    if matching_champs:
+        matching_champs.sort(key=lambda c: (c["winrate"] >= 50, c["play"] * (c["winrate"] / 100.0)), reverse=True)
+        return matching_champs[0]
+    if p.get("champions"):
+        return p["champions"][0]
+    return {
+        "name": "Pick Flessibile",
+        "play": 0, "wins": 0, "losses": 0, "winrate": 50.0,
+        "role": r, "dmg": "AD / AP", "class": "Flessibile", "first_pick": "Situazionale"
+    }
+
+def score_player_role(p: Dict[str, Any], r: str) -> float:
+    """Calcola il punteggio di idoneità (fit score) di un giocatore per un determinato ruolo"""
+    score = 0.0
+    decl = p.get("declared_roles", [])
+    if decl:
+        if r in decl:
+            idx = decl.index(r)
+            score += 150.0 - (idx * 30.0)
+        else:
+            score -= 100.0
+    else:
+        score += 40.0
+
+    role_champs = [c for c in p.get("champions", []) if champion_matches_role(c.get("role", ""), r)]
+    tot_play = sum(c["play"] for c in p.get("champions", [])) or 1
+    role_play = sum(c["play"] for c in role_champs)
+    role_wins = sum(c["wins"] for c in role_champs)
+    role_wr = (role_wins / role_play * 100.0) if role_play > 0 else 45.0
+
+    score += (role_play / tot_play) * 60.0
+    score += (role_wr - 50.0) * 2.0
+    return score
+
+def assign_optimal_lineup(roster: List[Dict[str, Any]]) -> Tuple[Dict[str, Dict[str, Any]], List[Dict[str, Any]]]:
+    """
+    Risolve il problema di assegnazione ottimale garantendo che ogni ruolo della squadra
+    (TOP, JUNGLE, MID, ADC, SUPPORT) abbia ALMENO un giocatore assegnato (o esattamente 1 titolare se roster >= 5),
+    senza sovrapposizioni tra i titolari, massimizzando i ruoli dichiarati tra [] e le performance individuali.
+    """
+    import itertools
+    if len(roster) < 5:
+        assigned = {}
+        used_roles = set()
+        for p in roster:
+            best_r = None
+            best_sc = -999999
+            for r in STANDARD_ROLES:
+                if r not in used_roles:
+                    sc = score_player_role(p, r)
+                    if sc > best_sc:
+                        best_sc = sc
+                        best_r = r
+            if best_r:
+                used_roles.add(best_r)
+                p["assigned_team_role"] = best_r
+                assigned[best_r] = p
+            else:
+                p["assigned_team_role"] = "RISERVA"
+        return assigned, []
+
+    best_score = -999999
+    best_assignment = None
+
+    candidates = roster if len(roster) <= 8 else roster[:8]
+    for subset in itertools.combinations(candidates, 5):
+        for perm in itertools.permutations(subset, 5):
+            cur_score = sum(score_player_role(perm[i], STANDARD_ROLES[i]) for i in range(5))
+            if cur_score > best_score:
+                best_score = cur_score
+                best_assignment = perm
+
+    assigned = {}
+    starters = list(best_assignment)
+    for i, r in enumerate(STANDARD_ROLES):
+        p = starters[i]
+        p["assigned_team_role"] = r
+        assigned[r] = p
+
+    reserves = [p for p in roster if p not in starters]
+    for p in reserves:
+        best_res_role = max(STANDARD_ROLES, key=lambda r: score_player_role(p, r))
+        p["assigned_team_role"] = f"RISERVA ({best_res_role})"
+
+    return assigned, reserves
 
 def parse_input_file(filepath: str) -> List[Tuple[str, str, List[str]]]:
     """
@@ -463,12 +588,23 @@ def generate_scouting_suite(input_file: str, output_dir: str = "output", region:
         print("[!] Nessun dato raccolto.")
         return
 
+    # Risoluzione distribuzione obbligatoria dei 5 ruoli (almeno 1 per ruolo)
+    lineup_assigned, reserves = assign_optimal_lineup(roster_data)
+    print("\n--- DISTRIBUZIONE SQUADRA GARANTITA (5 RUOLI UFFICIALI) ---")
+    for r in STANDARD_ROLES:
+        p_assigned = lineup_assigned.get(r)
+        if p_assigned:
+            print(f"  [{r:7}] -> {p_assigned['riot_id']} (Ruoli File: {p_assigned.get('declared_roles', [])})")
+    if reserves:
+        print(f"  [RISERVE] -> {', '.join(p['riot_id'] for p in reserves)}")
+    print("-----------------------------------------------------------\n")
+
     # ----------------------------------------------------
     # 1. OUTPUT: 01_roster_overview.csv
     # ----------------------------------------------------
     f1_path = os.path.join(output_dir, "01_roster_overview.csv")
     f1_fields = [
-        "Riot_ID", "Livello", "Ruolo_Principale", "Ruolo_Secondario", "Ruoli_Dichiarati_File",
+        "Riot_ID", "Livello", "Ruolo_Lineup_Titolare", "Ruolo_Principale", "Ruolo_Secondario", "Ruoli_Dichiarati_File",
         "SoloQ_Rank", "SoloQ_LP", "SoloQ_Winrate_%", "SoloQ_Partite_Totali",
         "Top_Comfort_Picks", "Sindrome_OTP", "Profilo_Danno_Prevalente",
         "Forma_Recente_10_Games", "Serie_Attuale", "Rischio_Tilt_Mentalita"
@@ -478,9 +614,11 @@ def generate_scouting_suite(input_file: str, output_dir: str = "output", region:
         w.writeheader()
         for p in roster_data:
             comfort_list = [f"{c['name']} ({c['winrate']}% WR su {c['play']}g)" for c in p["champions"] if c["winrate"] >= 52][:3]
+            titolare_role = p.get("assigned_team_role", "NON ASSEGNATO")
             w.writerow({
                 "Riot_ID": p["riot_id"],
                 "Livello": p["level"],
+                "Ruolo_Lineup_Titolare": f"TITOLARE: {titolare_role}" if titolare_role in STANDARD_ROLES else titolare_role,
                 "Ruolo_Principale": p["primary_role"],
                 "Ruolo_Secondario": p["secondary_role"],
                 "Ruoli_Dichiarati_File": ", ".join(p["declared_roles"]) if p["declared_roles"] else "Non specificati (Rilevati da stats)",
@@ -618,7 +756,7 @@ def generate_scouting_suite(input_file: str, output_dir: str = "output", region:
     # ----------------------------------------------------
     f4_path = os.path.join(output_dir, "04_scouting_report_tattico.csv")
     f4_fields = [
-        "Riot_ID", "Ruolo", "TARGET_BAN_CHIRURGICI", "NON_BANNARE_LASCIARE_OPEN",
+        "Riot_ID", "Ruolo_Titolare_Lineup", "Ruolo_SoloQ", "TARGET_BAN_CHIRURGICI", "NON_BANNARE_LASCIARE_OPEN",
         "PUNTI_DI_FORZA_CHIAVE", "DEBOLEZZE_SFRUTTABILI",
         "COME_GIOCARE_CON_LUI", "COME_GIOCARE_CONTRO_DI_LUI", "STATO_MENTALE_E_TILT"
     ]
@@ -648,10 +786,13 @@ def generate_scouting_suite(input_file: str, output_dir: str = "output", region:
 
             con_lui = f"Dagli in mano un comfort pick ({top_c}) e offrigli visione sul lato della mappa in cui gioca."
             contro_di_lui = f"Target ban prioritario: {', '.join(bans[:2]) if bans else top_c}. Se gioca {', '.join(traps[:2]) if traps else 'un pick secondario'}, lascialo fare: ha un basso winrate."
+            
+            titolare = p.get("assigned_team_role", p["primary_role"])
 
             w.writerow({
                 "Riot_ID": p["riot_id"],
-                "Ruolo": p["primary_role"],
+                "Ruolo_Titolare_Lineup": titolare,
+                "Ruolo_SoloQ": p["primary_role"],
                 "TARGET_BAN_CHIRURGICI": ", ".join(bans[:2]) if bans else f"{top_c} (Comfort)",
                 "NON_BANNARE_LASCIARE_OPEN": ", ".join(traps[:2]) if traps else "Nessun trap critico",
                 "PUNTI_DI_FORZA_CHIAVE": strengths,
@@ -666,41 +807,117 @@ def generate_scouting_suite(input_file: str, output_dir: str = "output", region:
     # ----------------------------------------------------
     f5_path = os.path.join(output_dir, "05_sinergie_squadra.csv")
     f5_fields = [
-        "Ruolo_Tattico", "Giocatore_Consigliato", "Comfort_Pick_Chiave",
-        "Tipo_Danno", "Tendenza_Risorse", "Sinergia_Ideale_Corsia",
-        "Raccomandazione_Draft_Squadra"
+        "Ruolo_Tattico",
+        "Stato_Copertura",
+        "Giocatore_Titolare",
+        "Motivazione_Assegnazione",
+        "Comfort_Pick_Migliore_Ruolo",
+        "Tipo_Danno",
+        "Tendenza_Risorse",
+        "Sinergia_Ideale_Corsia",
+        "Raccomandazione_Draft_Squadra",
+        "Alternative_Flex_in_Squadra"
     ]
     with open(f5_path, "w", newline="", encoding="utf-8-sig") as f:
         w = csv.DictWriter(f, fieldnames=f5_fields, delimiter=";")
         w.writeheader()
-        for p in roster_data:
-            c_name = p["champions"][0]["name"] if p["champions"] else "Pick Standard"
-            c_meta = get_champion_meta(c_name)
-            
-            if "MID" in p["primary_role"]:
-                sinergia = "Jungler AD con forte CC per gank letali (es. Sejuani, Xin Zhao, Vi)"
-                draft_rec = "Fornisce burst e waveclear. Assicurarsi che il team abbia AD in Top o Bot."
-            elif "TOP" in p["primary_role"]:
-                sinergia = "Midlaner aggressivo per convergere su Araldo/Voidgrubs"
-                draft_rec = "Se gioca tank assorbe pressione; se gioca duellante richiede visione profunda."
-            elif "JUNGLE" in p["primary_role"]:
-                sinergia = "Sololaner con priorità di spinta per contestare draghi e scuttle crab"
-                draft_rec = "Perno della macro early game: vietato lasciarlo solo negli invasi."
-            elif "ADC" in p["primary_role"]:
-                sinergia = "Support engage a catena o enchanter con forte disengage"
-                draft_rec = "Fonte primaria di DPS sostenuto: draftare peel e prima linea per proteggerlo."
-            else: # SUPPORT
-                sinergia = "ADC a lungo raggio o con forte follow-up sul CC"
-                draft_rec = "Controlla la visione intorno a Drago e Baron: non farlo vagare da solo."
+        
+        # 1. Copertura obbligatoria dei 5 ruoli (almeno 1 giocatore per ciascuno dei 5 ruoli ufficiali)
+        for r in STANDARD_ROLES:
+            p = lineup_assigned.get(r)
+            if p:
+                best_c = get_best_champion_for_role(p, r)
+                c_meta = get_champion_meta(best_c["name"])
 
+                decl = p.get("declared_roles", [])
+                if r in decl:
+                    idx = decl.index(r)
+                    if idx == 0:
+                        reason = f"Ruolo Primario Dichiarato nel file [{r}]"
+                    else:
+                        reason = f"Ruolo Dichiarato [{r}] (Ottimizzazione globale squadra)"
+                else:
+                    role_champs = [c for c in p.get("champions", []) if champion_matches_role(c.get("role", ""), r)]
+                    if role_champs:
+                        reason = f"Miglior rendimento statistico nel ruolo ({best_c['name']} {best_c['winrate']}% WR su {best_c['play']}g)"
+                    else:
+                        reason = f"Assegnazione tattica per bilanciamento della squadra (Autofill ottimale)"
+
+                # Identifica alternative flex all'interno del roster
+                flex_others = []
+                for other_p in roster_data:
+                    if other_p["riot_id"] != p["riot_id"]:
+                        if r in other_p.get("declared_roles", []) or any(champion_matches_role(c.get("role", ""), r) for c in other_p.get("champions", [])):
+                            flex_others.append(other_p["riot_id"].split("#")[0])
+                flex_str = ", ".join(flex_others) if flex_others else "Nessuna alternativa diretta (Unico specialista)"
+
+                if r == "TOP":
+                    sinergia = "Midlaner/Jungler con priorità per convergere su Araldo/Voidgrubs; TP pronto per draghi 3 e 4"
+                    draft_rec = "Se gioca tank (es. Ornn/Malphite) fa da perno frontline e assorbe weakside; se gioca duellante richiede visione profonda."
+                    tendenza = "Weakside / Frontline / Splitpush"
+                elif r == "JUNGLE":
+                    sinergia = "Sololaner con priorità di spinta (Mid/Top) per invadere, contestare scuttle e voidgrubs"
+                    draft_rec = "Perno assoluto della macro early game: vietato lasciarlo isolato negli invasi neutrali."
+                    tendenza = "Controllo Obiettivi / Tempo di Corsia"
+                elif r == "MID":
+                    sinergia = "Jungler aggressivo con hard CC (es. Sejuani, Vi, Xin Zhao) per gank letali 2v2 e rotazioni laterali"
+                    draft_rec = "Fornisce burst e waveclear rapido. Assicurarsi che il team abbia danno misto (AD/AP) distribuito."
+                    tendenza = "Strongside Priority (Controllo mappa e rotazioni)"
+                elif r == "ADC":
+                    sinergia = "Support engage per kill pressure (Nautilus, Blitzcrank) o Enchanter con forte disengage (Lulu, Janna)"
+                    draft_rec = "Fonte primaria di DPS continuo nei teamfight di late game: draftare peel e prima linea protettiva."
+                    tendenza = "Strongside Priority (Risorse farm e protezione totale)"
+                else: # SUPPORT
+                    sinergia = "ADC con forte follow-up sul CC; roaming coordinato con il Jungler per vision deep"
+                    draft_rec = "Controlla la visione intorno a Drago e Baron: preparare i varchi prima dello spawn."
+                    tendenza = "Low Economy / Playmaker & Visione Mappa"
+
+                w.writerow({
+                    "Ruolo_Tattico": r,
+                    "Stato_Copertura": "COPERTO (Titolare Assegnato)",
+                    "Giocatore_Titolare": p["riot_id"],
+                    "Motivazione_Assegnazione": reason,
+                    "Comfort_Pick_Migliore_Ruolo": f"{best_c['name']} ({best_c['winrate']}% WR su {best_c['play']}g)",
+                    "Tipo_Danno": best_c.get("dmg", c_meta.get("dmg", "AD/AP")),
+                    "Tendenza_Risorse": tendenza,
+                    "Sinergia_Ideale_Corsia": sinergia,
+                    "Raccomandazione_Draft_Squadra": draft_rec,
+                    "Alternative_Flex_in_Squadra": flex_str
+                })
+            else:
+                # Ruolo scoperto (se roster < 5)
+                w.writerow({
+                    "Ruolo_Tattico": r,
+                    "Stato_Copertura": "SCOPERTO / DA RECLUTARE (Meno di 5 giocatori nel roster)",
+                    "Giocatore_Titolare": "NESSUNO",
+                    "Motivazione_Assegnazione": "Mancanza di giocatori nel file per completare i 5 ruoli ufficiali",
+                    "Comfort_Pick_Migliore_Ruolo": "N/A",
+                    "Tipo_Danno": "N/A",
+                    "Tendenza_Risorse": "N/A",
+                    "Sinergia_Ideale_Corsia": "Ruolo critico mancante",
+                    "Raccomandazione_Draft_Squadra": f"Reclutare o assegnare un giocatore al ruolo di {r}.",
+                    "Alternative_Flex_in_Squadra": "N/A"
+                })
+
+        # 2. Scrittura eventuali riserve / panchinari (se presenti più di 5 giocatori)
+        for res in reserves:
+            best_r = res.get("assigned_team_role", "RISERVA").replace("RISERVA (", "").replace(")", "").strip()
+            if best_r not in STANDARD_ROLES:
+                best_r = STANDARD_ROLES[0]
+            best_c = get_best_champion_for_role(res, best_r)
+            c_meta = get_champion_meta(best_c["name"])
+            decl_s = ", ".join(res.get("declared_roles", [])) or "Rilevati da SoloQ"
             w.writerow({
-                "Ruolo_Tattico": p["primary_role"],
-                "Giocatore_Consigliato": p["riot_id"],
-                "Comfort_Pick_Chiave": c_name,
-                "Tipo_Danno": c_meta["dmg"],
-                "Tendenza_Risorse": "Strongside" if any(k in p["primary_role"] for k in ["MID", "ADC"]) else "Weakside / Utility",
-                "Sinergia_Ideale_Corsia": sinergia,
-                "Raccomandazione_Draft_Squadra": draft_rec
+                "Ruolo_Tattico": f"PANCHINA / RISERVA ({best_r})",
+                "Stato_Copertura": "RISERVA A DISPOSIZIONE",
+                "Giocatore_Titolare": res["riot_id"],
+                "Motivazione_Assegnazione": f"Sesto giocatore / Sostituto flessibile per {best_r} (Ruoli: {decl_s})",
+                "Comfort_Pick_Migliore_Ruolo": f"{best_c['name']} ({best_c['winrate']}% WR su {best_c['play']}g)",
+                "Tipo_Danno": best_c.get("dmg", c_meta.get("dmg", "AD/AP")),
+                "Tendenza_Risorse": "Flessibile / Sostituto",
+                "Sinergia_Ideale_Corsia": f"Pronto a subentrare in {best_r} in caso di indisponibilità o rotazione tattica.",
+                "Raccomandazione_Draft_Squadra": "Opzione tattica per sorprendere la draft avversaria.",
+                "Alternative_Flex_in_Squadra": "Riserva"
             })
 
     print(f"\n[OK] SCOUTING COMPLETATO CON SUCCESSO!")

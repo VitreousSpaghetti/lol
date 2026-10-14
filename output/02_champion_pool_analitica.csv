@@ -1,6 +1,6 @@
 ﻿Riot_ID;Campione;Ruolo_Tipico;Profilo_Danno;Classe_Campione;Partite_Giocate;Vittorie;Sconfitte;Winrate_%;Quota_Pool_%;Categoria_Scouting;First_Pick_Viability
-Fang Arroway#EUW;Irelia;Flessibile;Ibrido / Non Definito;Specialist;1;1;0;100.0;10.0;PICK SOLIDO / AFFIDABILE;Situazionale
-Fang Arroway#EUW;Yorick;Flessibile;Ibrido / Non Definito;Specialist;1;1;0;100.0;10.0;PICK SOLIDO / AFFIDABILE;Situazionale
+Fang Arroway#EUW;Irelia;TOP / MID;AD;Diver / Skirmisher;1;1;0;100.0;10.0;PICK SOLIDO / AFFIDABILE;Situazionale
+Fang Arroway#EUW;Yorick;TOP;AD;Juggernaut / Splitpush;1;1;0;100.0;10.0;PICK SOLIDO / AFFIDABILE;Situazionale
 Fang Arroway#EUW;Trundle;Flessibile;Ibrido / Non Definito;Specialist;1;0;1;0.0;10.0;SOTTO MEDIA / POCO EFFICACE;Situazionale
 Fang Arroway#EUW;Teemo;TOP;AP;Specialist / Harass;1;1;0;100.0;10.0;PICK SOLIDO / AFFIDABILE;Rischioso
 Fang Arroway#EUW;Nasus;Flessibile;Ibrido / Non Definito;Specialist;1;1;0;100.0;10.0;PICK SOLIDO / AFFIDABILE;Situazionale
@@ -21,6 +21,6 @@ UnluckyTeemo#995;Brand;SUPPORT / APC;AP;Mage Support / Teamfight;6;4;2;67.0;9.0;
 Ándre Agassi#8884;Janna;SUPPORT;AP;Disengage Enchanter;11;5;6;45.0;11.8;PICK MEDIANO / SITUAZIONALE;Buono
 Vitreous#COPS;Ornn;TOP;Tank / AP;Tank / Masterwork;67;38;29;57.0;42.9;COMFORT PICK ASSOLUTO (Da Bannare / Giocare);Ottimo Blind
 Vitreous#COPS;Mordekaiser;TOP;AP;Juggernaut;38;16;22;42.0;24.4;TRAP PICK / VULNERABILE (Lasciaglielo!);Buono
-Vitreous#COPS;Urgot;Flessibile;Ibrido / Non Definito;Specialist;20;11;9;55.0;12.8;COMFORT PICK ASSOLUTO (Da Bannare / Giocare);Situazionale
+Vitreous#COPS;Urgot;TOP;AD;Juggernaut;20;11;9;55.0;12.8;COMFORT PICK ASSOLUTO (Da Bannare / Giocare);Buono
 Vitreous#COPS;Rumble;Flessibile;Ibrido / Non Definito;Specialist;18;7;11;39.0;11.5;TRAP PICK / VULNERABILE (Lasciaglielo!);Situazionale
 Vitreous#COPS;Malphite;TOP;AP / Tank;Tank / Engage;13;9;4;69.0;8.3;PICK SOLIDO / AFFIDABILE;Contro AD
